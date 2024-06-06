@@ -2,6 +2,14 @@ apiVersion: v1
 entries:
   debezium-operator:
   - apiVersion: v2
+    appVersion: 2.7.0-beta1
+    created: "2024-06-06T15:34:07.984155434Z"
+    digest: e30ff5cb826ba2318aa9139264934061052a1cc4e6b84e0d9108ee2c6a46e731
+    name: debezium-operator
+    urls:
+    - https://github.com/debezium/debezium-operator-manifests/releases/download/debezium-operator-2.7.0-beta1/debezium-operator-2.7.0-beta1.tgz
+    version: 2.7.0-beta1
+  - apiVersion: v2
     appVersion: 2.6.1-final
     created: "2024-04-23T07:50:16.752939257Z"
     digest: 86020a5648d1f45a040e9c2c9c25e50e8716ad5cbf9584eda15df0b1322f8dd1
@@ -49,4 +57,4 @@ entries:
     urls:
     - https://github.com/debezium/debezium-operator-manifests/releases/download/debezium-operator-2.5.1-final/debezium-operator-2.5.1-final.tgz
     version: 2.5.1-final
-generated: "2024-04-23T07:50:16.752975615Z"
+generated: "2024-06-06T15:34:07.984215125Z"
