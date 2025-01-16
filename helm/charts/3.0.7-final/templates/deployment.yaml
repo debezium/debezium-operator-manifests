@@ -1,0 +1,69 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  annotations:
+    app.quarkus.io/quarkus-version: "3.17.0"
+  labels:
+    app.kubernetes.io/name: "debezium-operator"
+    app.kubernetes.io/managed-by: "quarkus"
+  name: "debezium-operator"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "debezium-operator"
+  template:
+    metadata:
+      annotations:
+        app.quarkus.io/quarkus-version: "3.17.0"
+      labels:
+        app.kubernetes.io/managed-by: "quarkus"
+        app.kubernetes.io/name: "debezium-operator"
+    spec:
+      containers:
+      - env:
+        - name: "KUBERNETES_NAMESPACE"
+          valueFrom:
+            fieldRef:
+              fieldPath: "metadata.namespace"
+        - name: "QUARKUS_OPERATOR_SDK_CONTROLLERS_DEBEZIUMSERVER_NAMESPACES"
+          value: {{ .Values.watchNamespaces }}
+        image: "quay.io/debezium/operator:3.0.7.Final"
+        imagePullPolicy: "Always"
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: "/q/health/live"
+            port: 8080
+            scheme: "HTTP"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: "debezium-operator"
+        ports:
+        - containerPort: 8080
+          name: "http"
+          protocol: "TCP"
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: "/q/health/ready"
+            port: 8080
+            scheme: "HTTP"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        startupProbe:
+          failureThreshold: 3
+          httpGet:
+            path: "/q/health/started"
+            port: 8080
+            scheme: "HTTP"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+      serviceAccountName: "debezium-operator"
