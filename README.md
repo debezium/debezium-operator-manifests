@@ -43,22 +43,26 @@ _Note: while the script uses these manifests files, the bundles included in the 
 ```
 
 
-## Creating new HELM charts
-Following these steps to create Helm chart for new Debezium Operator release.
 
-```bash
+## Creating new HELM charts
+
+~~Following these steps to create Helm chart for new Debezium Operator release.~~
+
+<del>
 # Change the following (should match maven version for desired release)
 export DEBEZIUM_VERSION="X.Y.Z.Final"
-
 # Install chart to helm/charts
 # (and commit right away)
 ./scripts/install-helm-chart.sh -v $DEBEZIUM_VERSION --commit
-```
+</del>
 
-_Note: After installing the chart you should review it for any potential problems and adjust accordingly. In case the changes were also committed, ammend any changes to the latest commit._
+~~_Note: After installing the chart you should review it for any potential problems and adjust accordingly. In case the changes were also committed, ammend any changes to the latest commit._~~
 
-Now push the changes and open a PR agaisnt the main branch of [manifest repo](https://github.com/debezium/debezium-operator-manifests) and all is done. GHA pipeline will create a GH release for new chart and publish it to index available at [charts.debezium.io](https://charts.debezium.io/index.yaml).
+~~Now push the changes and open a PR agaisnt the main branch of [manifest repo](https://github.com/debezium/debezium-operator-manifests) and all is done. GHA pipeline will create a GH release for new chart and publish it to index available at [charts.debezium.io](https://charts.debezium.io/index.yaml).~~
 
+Debezium Helm charts are now part of the Debezium release process. The charts are published to index available at [charts.debezium.io](https://charts.debezium.io/index.yaml).
+For more details, please refer to [debezium-charts](https://github.com/debezium/debezium-charts/blob/main/README.md).
+Any changes to the charts must be done in the relative project repo.
 
 ## Publishing bundles to OperatorHub catalogs
 Full documentation is available at [OperatorHub.io](https://operatorhub.io/contribute)
